@@ -1,0 +1,19 @@
+* {
+
+}
+
+
+body {
+    background-color: black;
+}
+
+.top {
+    font-family: "Germania One";
+    color: white;
+    margin: 0 auto;
+    text-align: center
+}
+
+.greetings {
+    display: inline-block;
+}
