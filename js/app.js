@@ -997,16 +997,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     'div',
                     { className: 'top' },
                     _react2.default.createElement(
-                        'h1',
-                        null,
-                        ' Siema, ',
-                        this.props.name,
-                        ' !!'
-                    ),
-                    _react2.default.createElement(
-                        'h2',
-                        null,
-                        'Witam na mojej stronie.'
+                        'div',
+                        { className: 'greetings' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Siema, ',
+                            name,
+                            ' !!'
+                        ),
+                        _react2.default.createElement(
+                            'h2',
+                            null,
+                            'Witam na mojej stronie.'
+                        )
                     )
                 );
             }
@@ -1015,22 +1019,84 @@ document.addEventListener('DOMContentLoaded', function () {
         return Top;
     }(_react2.default.Component);
 
-    _reactDom2.default.render(_react2.default.createElement(
-        'div',
-        { 'class': 'top' },
-        _react2.default.createElement(
-            'h1',
-            null,
-            ' Siema, ',
-            name,
-            ' !!'
-        ),
-        _react2.default.createElement(
-            'h2',
-            null,
-            'Witam na mojej stronie.'
-        )
-    ), document.getElementById('app'));
+    var Nav = function (_React$Component2) {
+        _inherits(Nav, _React$Component2);
+
+        function Nav() {
+            _classCallCheck(this, Nav);
+
+            return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+        }
+
+        _createClass(Nav, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'nav',
+                    null,
+                    _react2.default.createElement(
+                        'ul',
+                        { id: 'nav' },
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'O mnie'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'Co zrobi\u0142em'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'Kontakt'
+                            )
+                        )
+                    )
+                );
+            }
+        }]);
+
+        return Nav;
+    }(_react2.default.Component);
+
+    var App = function (_React$Component3) {
+        _inherits(App, _React$Component3);
+
+        function App() {
+            _classCallCheck(this, App);
+
+            return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        }
+
+        _createClass(App, [{
+            key: 'render',
+            value: function render() {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(Top, null),
+                    _react2.default.createElement(Nav, null)
+                );
+            }
+        }]);
+
+        return App;
+    }(_react2.default.Component);
+
+    _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 });
 
 /***/ }),
