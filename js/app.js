@@ -9633,17 +9633,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         _react2.default.createElement(
                             'h1',
                             null,
-                            'Siema, ',
+                            'Helo, ',
                             name,
                             ' !!'
                         ),
                         _react2.default.createElement(
                             'h2',
                             null,
-                            'Witam na mojej stronie.'
+                            'It my site, a\'right'
                         )
                     ),
-                    _react2.default.createElement(Button, null)
+                    _react2.default.createElement(Button2, null),
+                    _react2.default.createElement(Button1, null)
                 );
             }
         }]);
@@ -9675,7 +9676,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             _react2.default.createElement(
                                 'a',
                                 { href: '#' },
-                                'Kim jestem'
+                                'What am I?'
                             )
                         ),
                         _react2.default.createElement(
@@ -9684,7 +9685,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             _react2.default.createElement(
                                 'a',
                                 { href: '#' },
-                                'Co robi\u0119'
+                                'What\'s my purpose?'
                             )
                         )
                     )
@@ -9695,13 +9696,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return Nav;
     }(_react2.default.Component);
 
-    var Button = function (_React$Component3) {
-        _inherits(Button, _React$Component3);
+    var Button1 = function (_React$Component3) {
+        _inherits(Button1, _React$Component3);
 
-        function Button(props) {
-            _classCallCheck(this, Button);
+        function Button1(props) {
+            _classCallCheck(this, Button1);
 
-            var _this3 = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+            var _this3 = _possibleConstructorReturn(this, (Button1.__proto__ || Object.getPrototypeOf(Button1)).call(this, props));
 
             _this3.state = {
                 clickCount: 0
@@ -9709,7 +9710,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return _this3;
         }
 
-        _createClass(Button, [{
+        _createClass(Button1, [{
             key: 'handleClick',
             value: function handleClick() {
                 this.setState({
@@ -9726,7 +9727,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     { id: 'button1', onClick: function onClick() {
                             return _this4.handleClick();
                         } },
-                    'Wci\u015Bnij mnie! ',
+                    'Click Me! ',
                     _react2.default.createElement(
                         'p',
                         null,
@@ -9736,11 +9737,55 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }]);
 
-        return Button;
+        return Button1;
     }(_react2.default.Component);
 
-    var App = function (_React$Component4) {
-        _inherits(App, _React$Component4);
+    var Button2 = function (_React$Component4) {
+        _inherits(Button2, _React$Component4);
+
+        function Button2(props) {
+            _classCallCheck(this, Button2);
+
+            var _this5 = _possibleConstructorReturn(this, (Button2.__proto__ || Object.getPrototypeOf(Button2)).call(this, props));
+
+            _this5.state = {
+                clickCount: 0
+            };
+            return _this5;
+        }
+
+        _createClass(Button2, [{
+            key: 'handleClick',
+            value: function handleClick() {
+                this.setState({
+                    clickCount: this.state.clickCount + 1 //    clickCount: clickCount+1,
+                });
+            }
+        }, {
+            key: 'render',
+            value: function render() {
+                var _this6 = this;
+
+                return _react2.default.createElement(
+                    'button',
+                    { id: 'button2', onClick: function onClick() {
+                            return _this6.handleClick();
+                        } },
+                    'Don\'t Click Me! ',
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        this.state.clickCount
+                    )
+                );
+            }
+        }]);
+
+        return Button2;
+    }(_react2.default.Component);
+
+    var App = function (_React$Component5) {
+        _inherits(App, _React$Component5);
 
         function App() {
             _classCallCheck(this, App);

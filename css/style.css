@@ -62,3 +62,24 @@ nav {
     text-shadow: 2px 2px rgba(5, 5, 5, 1);
 
 }
+
+#button2 {
+    width: 45px;
+    height: 75px;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    font-size: 0.7rem;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    margin: 0 auto;
+    border-radius: 20px;
+
+}
+
+#button2 p {
+    font-size: 1.5rem;
+    text-shadow: 2px 2px rgba(5, 5, 5, 1);
+
+}
