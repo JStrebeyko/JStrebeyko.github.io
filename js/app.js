@@ -9610,7 +9610,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    var name = prompt('Jak masz na imię?');
+    var name = prompt("Who/'s that girl?");
 
     var Top = function (_React$Component) {
         _inherits(Top, _React$Component);
@@ -9696,13 +9696,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return Nav;
     }(_react2.default.Component);
 
-    var Button1 = function (_React$Component3) {
-        _inherits(Button1, _React$Component3);
+    var Button = function (_React$Component3) {
+        _inherits(Button, _React$Component3);
 
-        function Button1(props) {
-            _classCallCheck(this, Button1);
+        function Button(props) {
+            _classCallCheck(this, Button);
 
-            var _this3 = _possibleConstructorReturn(this, (Button1.__proto__ || Object.getPrototypeOf(Button1)).call(this, props));
+            var _this3 = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
             _this3.state = {
                 clickCount: 0
@@ -9710,22 +9710,36 @@ document.addEventListener('DOMContentLoaded', function () {
             return _this3;
         }
 
-        _createClass(Button1, [{
+        _createClass(Button, [{
             key: 'handleClick',
             value: function handleClick() {
                 this.setState({
                     clickCount: this.state.clickCount + 1 //    clickCount: clickCount+1,
                 });
             }
-        }, {
+        }]);
+
+        return Button;
+    }(_react2.default.Component);
+
+    var Button1 = function (_Button) {
+        _inherits(Button1, _Button);
+
+        function Button1() {
+            _classCallCheck(this, Button1);
+
+            return _possibleConstructorReturn(this, (Button1.__proto__ || Object.getPrototypeOf(Button1)).apply(this, arguments));
+        }
+
+        _createClass(Button1, [{
             key: 'render',
             value: function render() {
-                var _this4 = this;
+                var _this5 = this;
 
                 return _react2.default.createElement(
                     'button',
-                    { id: 'button1', onClick: function onClick() {
-                            return _this4.handleClick();
+                    { className: 'button do', onClick: function onClick() {
+                            return _this5.handleClick();
                         } },
                     'Click Me! ',
                     _react2.default.createElement(
@@ -9738,38 +9752,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }]);
 
         return Button1;
-    }(_react2.default.Component);
+    }(Button);
 
-    var Button2 = function (_React$Component4) {
-        _inherits(Button2, _React$Component4);
+    var Button2 = function (_Button2) {
+        _inherits(Button2, _Button2);
 
-        function Button2(props) {
+        function Button2() {
             _classCallCheck(this, Button2);
 
-            var _this5 = _possibleConstructorReturn(this, (Button2.__proto__ || Object.getPrototypeOf(Button2)).call(this, props));
-
-            _this5.state = {
-                clickCount: 0
-            };
-            return _this5;
+            return _possibleConstructorReturn(this, (Button2.__proto__ || Object.getPrototypeOf(Button2)).apply(this, arguments));
         }
 
         _createClass(Button2, [{
-            key: 'handleClick',
-            value: function handleClick() {
-                this.setState({
-                    clickCount: this.state.clickCount + 1 //    clickCount: clickCount+1,
-                });
-            }
-        }, {
             key: 'render',
             value: function render() {
-                var _this6 = this;
+                var _this7 = this;
 
                 return _react2.default.createElement(
                     'button',
-                    { id: 'button2', onClick: function onClick() {
-                            return _this6.handleClick();
+                    { className: 'button donot', onClick: function onClick() {
+                            return _this7.handleClick();
                         } },
                     'Don\'t Click Me! ',
                     _react2.default.createElement(
@@ -9782,10 +9784,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }]);
 
         return Button2;
-    }(_react2.default.Component);
+    }(Button);
 
-    var App = function (_React$Component5) {
-        _inherits(App, _React$Component5);
+    var App = function (_React$Component4) {
+        _inherits(App, _React$Component4);
 
         function App() {
             _classCallCheck(this, App);
