@@ -27,6 +27,7 @@ nav {
     padding-right: 10%;
     padding-left: 10%;
 }
+
 #nav {
     list-style-type: none;
     display: flex;
@@ -34,11 +35,13 @@ nav {
     justify-content: space-around;
     width: 100%;
 }
+
 #nav li {
     display: block;
     font-family: "Jura", sans-serif;
     font-size: 2rem;
 }
+
 #nav a {
     color: inherit;
 }
