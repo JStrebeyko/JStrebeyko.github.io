@@ -1,7 +1,8 @@
 <template>
-    <div class="home" @click="handleClick">
+    <div class="home">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-      <text-container slot="box"
+      <text-container
+        @clicked="handleClick"
         :juzi="juziObj"
       />
   </div>
@@ -54,6 +55,7 @@ export default {
       this.setIndex()
       let newObj  = this.juziList[this.index]
       this.juziObj=newObj
+      this.juziObj={chinese: "ass"}
     },
     handleClick() {
       this.setJuziObj()

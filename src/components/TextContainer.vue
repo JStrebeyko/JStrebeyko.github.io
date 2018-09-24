@@ -1,10 +1,14 @@
 <template>
-  <div class="box" @click="$emit('clicked')">
-    <div class="main">
-      {{juzi.chinese}}
+  <div class="overlay"
+      :style="style"
+      @click="handleClick">
+    <div class="box">
+      <div class="main">
+        {{juzi.chinese}}
+      </div>
+      <div class="left">{{juzi.pronunciation}}</div>
+      <div class="right">{{juzi.english}}</div>
     </div>
-    <div class="left">{{juzi.pronunciation}}</div>
-    <div class="right">{{juzi.english}}</div>
   </div>
 </template>
 
@@ -13,17 +17,53 @@ export default {
   props: {
     juzi: {
       type: Object
-    },
+    }
   },
   data() {
     return {
-
+      styleNum: null,
+      styles:{
+        red: {
+          backgroundColor: 'red',
+          color: 'white'
+        },
+        white: {
+          backgroundColor: 'white',
+          color: 'red'
+        },
+        bigYellow: {
+          backgroundColor: 'black',
+          fontSize: '13rem',
+          color: 'yellow'
+        }
+      },
     }
   },
   methods: {
     changeStyle() {
-      const num = Math.floor(Math.random*100)
-      console.log(`style Changed to:: ${num}`)
+      const amount = Object.keys(this.styles).length
+      const num = Math.floor(Math.random*amount)
+      console.log(`style Changed to:: ${num}`
+      )
+    },
+    handleClick() {
+      // this.$emit('clicked')
+      this.changeStyle()
+      this.styleNum++
+      console.log(`number of styles: ${Object.keys(this.styles).length}`)
+    }
+  },
+  computed: {
+    style() {
+      if (this.styleNum == 0) {
+        return this.styles.bigYellow
+      } else if (this.styleNum == 1) {
+        return this.styles.white
+      } else if (this.styleNum == 2) {
+        return this.styles.red
+      } else {
+        this.styleNum =0
+      }
     }
   },
   watch: {
@@ -36,6 +76,15 @@ export default {
 </script>
 
 <style>
+.overlay {
+  background-color: rgba(0,0,0,0.1);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
 .box>.main {
     font-size:15rem;
