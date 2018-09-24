@@ -55,7 +55,7 @@ export default {
       this.setIndex()
       let newObj  = this.juziList[this.index]
       this.juziObj=newObj
-      this.juziObj={chinese: ""}
+      this.juziObj={chinese: "ass"}
     },
     handleClick() {
       this.setJuziObj()
