@@ -1,6 +1,11 @@
 <template>
-  <div class="hello">
-    {{msg}}
+  <div class="hello" @click="isSwapped=!isSwapped">
+    <div class="main-header" :style="{color: isSwapped ? 'black' :color, backgroundColor: isSwapped ? color:'black'}">
+    {{hanzi.chinese}}
+    </div>
+    <div class="controls">
+
+    </div>
   </div>
 </template>
 
@@ -8,7 +13,20 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: {
+      type: String
+    },
+    color: {
+      type: String
+    },
+    hanzi: {
+      type: Object
+    }
+  },
+  data() {
+    return {
+      isSwapped: false
+    }
   }
 }
 </script>
@@ -16,10 +34,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .hello {
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: black;
-  color: white;
-  font-size: 7rem;
+  .main-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 17rem;
+    min-width:95vw;
+    min-height: 100vh;
+    font-family: monospace;
+    transition: 5000ms;
+  }
+  .controls {
+    min-height: 20vh;
+    background: red;
+  }
+
 }
 </style>
