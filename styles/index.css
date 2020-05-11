@@ -46,35 +46,44 @@ nav {
 	position: relative;
 }
 
-nav a div {
+/* nav a div {
 	font-size: 10vw;
+	height: 50vw;
+	width: 50vw;
+	position: absolute;
+} */
+
+.about,
+.work,
+.hire {
+		font-size: 10vw;
 	height: 50vw;
 	width: 50vw;
 	position: absolute;
 }
 
-nav a:nth-child(1) div {
+.about {
 	background-color: rgb(64, 243, 64);
 	top: 0;
 	left: 0;
 }
 
-nav a:nth-child(2) div {
+.work {
 	background-color: rgb(255, 86, 232);
 	top: 10vw;
 	left: 20vw;
 }
 
-nav a:nth-child(3) div {
+.hire {
 	background-color: rgb(52, 247, 221);
 	top: 20vw;
 	left: 40vw;
 }
 
 /* HOVERS */
-nav a:nth-child(1) div:hover,
-nav a:nth-child(2) div:hover,
-nav a:nth-child(3) div:hover {
+.about:hover,
+.work:hover,
+.hire:hover {
 	top: -10px;
 }
 
@@ -89,10 +98,17 @@ footer {
 	padding: 10px 0;
 }
 
- /* Extra small devices (phones, 600px and down)
+ /* Extra small devices (phones, 600px and down) */
  @media screen and (max-width: 600px) {
-
- } */
+.about,
+.work,
+.hire {
+	font-size: 10vw;
+	height: 50vw;
+	width: 50vw;
+	position: absolute;
+}
+ }
 
  /* Small devices (portrait tablets and large phones, 600px and up) */
  @media only screen and (min-width: 600px) {
@@ -113,24 +129,26 @@ footer {
 		width: 80%;
 	}
 	
-	nav a div {
+	.about,
+	.work,
+	.hire {
 		font-size: 70px;
 		height: 350px;
 		width: 350px;
 		position: absolute;
 	}
 
-	nav a:nth-child(1) div {
+	.about {
 		top: 0;
 		left: 0;
 	}
 
-	nav a:nth-child(2) div {
+	.work {
 		top: 70px;
 		left: 25%;
 	}
 
-	nav a:nth-child(3) div {
+	.hire {
 		top: 140px;
 		left: 50%;
 	}
@@ -150,17 +168,17 @@ footer {
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width: 1200px) {
 
-	nav a:nth-child(1) div {
+	.about {
 		top: 0;
 		left: 0;
 	}
 
-	nav a:nth-child(2) div {
+	.work {
 		top: 70px;
 		left: 30%;
 	}
 
-	nav a:nth-child(3) div {
+	.hire {
 		top: 140px;
 		left: 60%;
 	}
@@ -173,6 +191,12 @@ footer {
 	animation-duration: 1s;
 	/* animation-iteration-count: infinite; */
 	animation-fill-mode: forwards;
+}
+
+.minimize1 {
+		animation-name: enlarge1;
+		animation-duration: 1s;
+		animation-fill-mode: backwards;
 }
 
 @keyframes enlarge1 {
@@ -193,5 +217,5 @@ footer {
 	height: 100%;
 	width: 100%;
 	background-color: transparent;
-	z-index: -2;
+	visibility: hidden;
 }
