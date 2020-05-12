@@ -1,5 +1,6 @@
 (function setup(context) {
 	var container;
+	var originalNode;
 
 	const nav = document.querySelector('nav')
 	var [about, work, hire] = nav.children;
@@ -13,71 +14,79 @@
 	// the boxes will jump between the two layers:
 	const wrap = document.querySelector('.full-wrap')
 
-	// let's save the original box position in case we need to retract there:
-	var originalBox = {
-		set: function setOriginalBox(node) {
-			console.log(getComputedStyle(node))
-			const { top, left, width, height } = getComputedStyle(node)
-			originalBox.top = top
-			originalBox.left = left
-			originalBox.width = width
-			originalBox.height = height
-		},
-		get: function getOriginalBox() {
-			return {
-				top: originalBox.top,
-				left: originalBox.left,
-				width: originalBox.width,
-				height: originalBox.height
-			}
-		},
+	const AboutContent = `<h1>haha</h1>`
+	const WorkContent = `<h1>haha</h1>`
+	const HireContent = `<h1>haha</h1>`
+
+	const routes = {
+		"/about": AboutContent,
+		"/work": WorkContent,
+		"/hire": HireContent
 	}
 
-	/**
-	 *  to handle box click
-	 * 1. a custom event handler, preventingDefault() and doing router magick.
-	 * 2. ANIMATION
-	 *    a) appending the box onto the overlay
-	 *    b) doing actual animation
-	 *    c) when done : providing visibility classes to box children
-	 * 3. BACK BUTTON
-	 *    a) folding animation
-	 * 		b) router magick
-	 */
-
 	function show(node) {
-		console.log('LOADED')
-		console.log(node)
-		
-		// Back-button functionality
-		node.addEventListener('click', function addClose() {
-			close(node)
-			node.removeEventListener('click', addClose)
-		})
 
+		const subpageName = '/'+node.innerText;
+
+		// Back-button functionality
+		(function spawnCloseButton() {
+			const closeButton = document.createElement('button');
+			closeButton.setAttribute('aria-label', 'close')
+			closeButton.classList.add('close');
+			const buttonConent = document.createTextNode('×')
+			closeButton.append(buttonConent);
+			closeButton.addEventListener('click', function addClose() {
+				close(node)
+				history.pushState({}, '', window.location.origin)
+				closeButton.removeEventListener('click', addClose)
+			})
+			node.append(closeButton);
+		})();
+
+		// URL management
+		(function manageURL(){
+			history.pushState({}, '', window.location.origin + subpageName)
+			console.log(history)
+		})();
+
+		// populating conent
+		(function showContent(){
+			// 1.1. Create a div
+			var contentDiv = document.createElement('div');
+			// contentDiv.classList.add('content');
+
+			// 1.2
+			node.append(contentDiv);
+			contentDiv.innerHTML = routes[window.location.pathname];
+		})();
 	}
 
 	function close(node) {
 		// 0. get link wrapper:
-		console.log(node.innerText)
+		
+		// originalNode.classList.remove('hidden')
 
 		// 1. Animate back
-		node.classList.toggle('full-screen1')
 		// originalBox.getThere(node)
 		// node.classList.add('minimize1');
-		console.log(originalBox.get())
-		const {top, left, height, width} = originalBox.get();
-		node.style.top = top;
-		node.style.left = left;
-		node.style.height = height;
-		node.style.width = width;
+		// console.log(originalBox.get())
+		// const {top, left, height, width} = originalBox.get();
+		// node.style.top = top;
+		// node.style.left = left;
+		// node.style.height = height;
+		// node.style.width = width;
 
 		// 2. Append to its original position
-		wrap.style.visibility = 'hidden';
-
-		anchorWrappers[node.textContent].append(node)
-		// console.log(node.classList)
-		console.log('should hide!')
+		node.classList.remove('full-screen1');
+		node.classList.add('minimized1');
+		node.addEventListener('animationend', function onAnimationEnd() {
+			node.removeEventListener('animationend', onAnimationEnd)
+			originalNode.style.visibility = 'visible';
+			node.remove()
+			wrap.style.visibility = 'hidden';
+			console.log('should hide!')
+		})
+		// anchorWrappers[node.textContent].append(node)
 		// node.removeEventListener('click', close)
 	}
 	// function copyNodeStyle(sourceNode, targetNode) {
@@ -110,26 +119,27 @@
 		// 1.1 get the box
 		const {x, y, width, height} = node.getBoundingClientRect()
 
-		// 1.1 save the original boxes dimensions - DOES NOT WORK, as it saves the absolute (view-port-relative) position values - not the ones against the parent
-		originalBox.set(node)
-		console.log(originalBox.get())
+		// 1.1 let's have a reference to the original menu box:
+		originalNode = node;
 
-		// 1.2 append it to the overlay wrapper with original box's position
-		wrap.append(node)
-		node.style.top = `${y}px`;
-		node.style.left = `${x}px`;
+		// 1.2 copy node and append it to the overlay wrapper with original box's position
+		const nodeCopy = node.cloneNode(true)
+		originalNode.style.visibility = 'hidden';
+		wrap.append(nodeCopy)
+		nodeCopy.style.top = `${y}px`;
+		nodeCopy.style.left = `${x}px`;
 
 		// 1.3 make the overlay visible
 		wrap.style.visibility = 'visible'
 
 		// 2.1 animate fullscreen
-		// TODO: differentiate animations consitionally
-		node.classList.toggle('full-screen1')
+		// TODO: differentiate animations conditionally
+		nodeCopy.classList.add('full-screen1')
 
-		// 3.1 boxes content animation callback"
-		node.addEventListener('animationend', function addShow() {
-			show(node);
-			node.removeEventListener('animationend', addShow)
+		// 3.1 boxes content animation callback
+		nodeCopy.addEventListener('animationend', function addShow() {
+			nodeCopy.removeEventListener('animationend', addShow)
+			show(nodeCopy);
 		})
 
 										// OLD HANDLING - literally copying the node to only append it 🤦‍♂️

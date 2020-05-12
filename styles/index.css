@@ -193,13 +193,28 @@ footer {
 	animation-fill-mode: forwards;
 }
 
-.minimize1 {
-		animation-name: enlarge1;
+/* THE REPETITION HERE IS BOLLOCKS */
+/* It seems that an animation of the same name fired the second time will not trigger onanimationend*/
+.minimized1 {
+		animation-name: minimize1;
 		animation-duration: 1s;
-		animation-fill-mode: backwards;
+		animation-direction: reverse;
 }
 
 @keyframes enlarge1 {
+	30% {
+		top: 0;
+		left: 0;
+	}
+	100% {
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+	}
+}
+
+@keyframes minimize1 {
 	30% {
 		top: 0;
 		left: 0;
@@ -218,4 +233,36 @@ footer {
 	width: 100%;
 	background-color: transparent;
 	visibility: hidden;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.close {
+	font-size: 10rem;
+}
+
+
+/**
+		BUTTON STYLE RESET: https://css-tricks.com/overriding-default-button-styles/
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+ button.close {
+	/* reset */
+  padding: 0;
+	border: none;
+	margin: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  /* show a hand cursor on hover; some argue that we
+  should keep the default arrow cursor for buttons */
+	cursor: pointer;
+	
+	position: absolute;
+	right: 20px;
+	top: 20px;
 }
