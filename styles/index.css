@@ -53,37 +53,35 @@ nav {
 	position: absolute;
 } */
 
-.about,
-.work,
-.hire {
-		font-size: 10vw;
+.box {
+	font-size: 10vw;
 	height: 50vw;
 	width: 50vw;
 	position: absolute;
 }
 
-.about {
+.box.about {
 	background-color: rgb(64, 243, 64);
 	top: 0;
 	left: 0;
 }
 
-.work {
+.box.work {
 	background-color: rgb(255, 86, 232);
 	top: 10vw;
 	left: 20vw;
 }
 
-.hire {
+.box.hire {
 	background-color: rgb(52, 247, 221);
 	top: 20vw;
 	left: 40vw;
 }
 
 /* HOVERS */
-.about:hover,
-.work:hover,
-.hire:hover {
+.box.about:hover,
+.box.work:hover,
+.box.hire:hover {
 	top: -10px;
 }
 
@@ -100,9 +98,7 @@ footer {
 
  /* Extra small devices (phones, 600px and down) */
  @media screen and (max-width: 600px) {
-.about,
-.work,
-.hire {
+.box {
 	font-size: 10vw;
 	height: 50vw;
 	width: 50vw;
@@ -129,26 +125,25 @@ footer {
 		width: 80%;
 	}
 	
-	.about,
-	.work,
-	.hire {
+	.box {
 		font-size: 70px;
 		height: 350px;
 		width: 350px;
 		position: absolute;
+		overflow: hidden;
 	}
 
-	.about {
+	.box.about {
 		top: 0;
 		left: 0;
 	}
 
-	.work {
+	.box.work {
 		top: 70px;
 		left: 25%;
 	}
 
-	.hire {
+	.box.hire {
 		top: 140px;
 		left: 50%;
 	}
@@ -168,17 +163,17 @@ footer {
  /* Extra large devices (large laptops and desktops, 1200px and up) */
  @media only screen and (min-width: 1200px) {
 
-	.about {
+	.box.about {
 		top: 0;
 		left: 0;
 	}
 
-	.work {
+	.box.work {
 		top: 70px;
 		left: 30%;
 	}
 
-	.hire {
+	.box.hire {
 		top: 140px;
 		left: 60%;
 	}
@@ -188,7 +183,7 @@ footer {
 .full-screen1 {
 	/* position: absolute; */
 	animation-name: enlarge1;
-	animation-duration: 1s;
+	animation-duration: 2s;
 	/* animation-iteration-count: infinite; */
 	animation-fill-mode: forwards;
 }
@@ -233,10 +228,7 @@ footer {
 	width: 100%;
 	background-color: transparent;
 	visibility: hidden;
-}
-
-.hidden {
-	visibility: hidden;
+	overflow-x: hidden;
 }
 
 .close {
@@ -265,4 +257,25 @@ footer {
 	position: absolute;
 	right: 20px;
 	top: 20px;
+
+	/* make it hidden at first */
+	transition: opacity 2s;
+}
+
+.full-height {
+	overflow-y: auto;
+}
+
+.hidden {
+	opacity: 0;
+	transition: opacity 5s
+}
+
+article {
+	opacity: 1;
+	transition: opacity 1s
+}
+
+.invisible-container {
+	display: none;
 }
