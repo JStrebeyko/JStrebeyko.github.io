@@ -95,6 +95,7 @@
 				container.classList.add('minimized1');
 				closeButton.hide()
 				// TODO: retract text
+
 				container.addEventListener('animationend', function onAnimationEnd() {
 					container.removeEventListener('animationend', onAnimationEnd)
 					originalMenuBox.style.visibility = 'visible';

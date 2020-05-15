@@ -46,13 +46,6 @@ nav {
 	position: relative;
 }
 
-/* nav a div {
-	font-size: 10vw;
-	height: 50vw;
-	width: 50vw;
-	position: absolute;
-} */
-
 .box {
 	font-size: 10vw;
 	height: 50vw;
@@ -234,13 +227,6 @@ footer {
 .close {
 	font-size: 10rem;
 }
-
-
-/**
-		BUTTON STYLE RESET: https://css-tricks.com/overriding-default-button-styles/
- * 1. Change the font styles in all browsers.
- * 2. Remove the margin in Firefox and Safari.
- */
 
  button.close {
 	/* reset */
