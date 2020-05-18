@@ -3,6 +3,8 @@
 
 	var originalMenuBox;
 
+	var menuBoxCopy;
+
 	var sectionSelected = '';
 	
 	// the boxes will jump between the two layers:
@@ -26,6 +28,33 @@
 	}
 	setupLinks();
 
+	/**
+	 * Utility class
+	 * @param {string} className animation class to be applied 
+	 */
+	function animateWithClassAndAppend(className) {
+		const {x, y, width, height} = originalMenuBox.getBoundingClientRect()
+
+		// 1.1 copy the original menu box and make it invisible
+		originalMenuBox.style.visibility = 'hidden';
+
+		// 1.2 add the copied node to the overlay and position it in the place of the disappeared one
+		wrap.append(menuBoxCopy)
+		menuBoxCopy.style.top = `${y}px`;
+		menuBoxCopy.style.left = `${x}px`;
+		wrap.style.visibility = 'visible'
+
+		// 1.3 animate fullscreen
+		menuBoxCopy.classList.add(className)
+		container = menuBoxCopy;
+
+		// 1.4 boxes content animation callback
+		menuBoxCopy.addEventListener('animationend', function addShow() {
+			menuBoxCopy.removeEventListener('animationend', addShow)
+			appendContent();
+		})
+	}
+
 
 	/**
 	 *  @param node DOMNode representing a nav box clicked 
@@ -33,34 +62,18 @@
 	 *  it should end up with a full screen container.
 	 */
 	function open(node) {
+		originalMenuBox = node;
+		menuBoxCopy = node.cloneNode(true);
 		
-		// 1. Animate accordingly
+		// Animate accordingly
 		switch(sectionSelected){
-			// 1.1 'About' animation: swipe to left upper corner and enlarge:
+			// 1. 'About' animation: swipe to left upper corner and enlarge
 			case 'about':
-				const {x, y, width, height} = node.getBoundingClientRect()
-				const menuBoxCopy = node.cloneNode(true);
-				originalMenuBox = node;
-				originalMenuBox.style.visibility = 'hidden';
-				wrap.append(menuBoxCopy)
-				menuBoxCopy.style.top = `${y}px`;
-				menuBoxCopy.style.left = `${x}px`;
-				// 1.3 make the overlay visible
-				wrap.style.visibility = 'visible'
-
-				// 2.1 animate fullscreen
-				// TODO: differentiate animations conditionally
-				menuBoxCopy.classList.add('full-screen1')
-
-				container = menuBoxCopy;
-
-				// 3.1 boxes content animation callback
-				menuBoxCopy.addEventListener('animationend', function addShow() {
-					menuBoxCopy.removeEventListener('animationend', addShow)
-					appendContent(menuBoxCopy);
-				})
+				animateWithClassAndAppend('full-screen1')
 				break;
+			// 2. 'Work' animation: make it full-height, then widen to full width
 			case 'work':
+				animateWithClassAndAppend('stretch')
 				break;
 			case 'hire':
 			  break;
@@ -69,43 +82,74 @@
 		}
 	}
 
-	function appendContent(node) {
+	function appendContent() {
+		console.log(sectionSelected)
 		var contentToAppend = articles.querySelector(`article.${sectionSelected}-content`).cloneNode(true)
 		var justACloseButton = closeButton.get()
 		// Append content & close button
-		node.append(contentToAppend);
-		node.append(justACloseButton);
+		container.append(contentToAppend);
+		container.append(justACloseButton);
 		
 		setTimeout(function() {
-			node.classList.add('full-height');
+			container.classList.add('full-height');
 			contentToAppend.classList.remove('hidden');
 			justACloseButton.classList.remove('hidden');
 		},0)
 	}
 
 	/**
+	 * utility class
+	 * @param {string} classToAdd
+	 * @param {string} classToRemove
+	 * TODO: use a utility class to avoid repetition below (?)
+	 */
+
+	
+	/**
 	 *  Close the section, the animation is section-dependant
 	 */
 	function close() {		
-		switch(sectionSelected){
-			// 1.1 'About' animation: swipe to left upper corner and enlarge:
-			case 'about':
-				// 2. Append to its original position
-				container.classList.remove('full-screen1');
-				container.classList.add('minimized1');
-				closeButton.hide()
-				// TODO: retract text
+		var contents = container.querySelector('article');
 
-				container.addEventListener('animationend', function onAnimationEnd() {
-					container.removeEventListener('animationend', onAnimationEnd)
-					originalMenuBox.style.visibility = 'visible';
-					container.remove()
-					wrap.style.visibility = 'hidden';
-					console.log('should hide!')
-					container=undefined;
-				})
+		switch(sectionSelected){
+			case 'about':
+				// 1.1. grab article and hide its content			
+				contents.classList.add('retract-text')
+				container.classList.remove('full-height')
+				
+				// 1.2 While contents are disappearing, start minimizing
+				var delay = setTimeout(function myDelay(){
+					container.classList.remove('full-screen1');
+					container.classList.add('minimized1');
+
+					// 1.3 finalize close: remove the container, make the original box visible;
+					container.addEventListener('animationend', function onAnimationEnd() {
+						container.removeEventListener('animationend', onAnimationEnd)
+						originalMenuBox.style.visibility = 'visible';
+						container.remove()
+						wrap.style.visibility = 'hidden';
+						clearTimeout(delay)
+					})
+				}, 1)
 				break;
 			case 'work':
+				// Repetition:
+				contents.classList.add('retract-text')
+				container.classList.remove('full-height')
+
+				var delay = setTimeout(function myDelay() {
+					container.classList.remove('stretch');
+					container.classList.add('minimized2');
+
+					// 1.3 finalize close: remove the container, make the original box visible;
+					container.addEventListener('animationend', function onAnimationEnd() {
+						container.removeEventListener('animationend', onAnimationEnd)
+						originalMenuBox.style.visibility = 'visible';
+						container.remove()
+						wrap.style.visibility = 'hidden';
+						clearTimeout(delay)
+					})
+				}, 1)
 				break;
 			case 'hire':
 			  break;

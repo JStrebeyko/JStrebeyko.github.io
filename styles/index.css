@@ -176,7 +176,7 @@ footer {
 .full-screen1 {
 	/* position: absolute; */
 	animation-name: enlarge1;
-	animation-duration: 2s;
+	animation-duration: 1s;
 	/* animation-iteration-count: infinite; */
 	animation-fill-mode: forwards;
 }
@@ -254,14 +254,60 @@ footer {
 
 .hidden {
 	opacity: 0;
-	transition: opacity 5s
+	transition: opacity 5s;
+}
+
+.retract-text {
+	opacity: 0;
+	transition: opacity 1s;
 }
 
 article {
 	opacity: 1;
-	transition: opacity 1s
+	transition: opacity 0.5s;
 }
 
 .invisible-container {
 	display: none;
+}
+
+
+/* Work aniation */
+/* REPETITION AF */
+.stretch {
+	animation-name: stretch-v;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+}
+
+.minimized2 {
+	animation-name: minimize2;
+	animation-duration: 1s;
+	animation-direction: reverse;
+}
+
+@keyframes stretch-v {
+	20% {
+		top: 0;
+		height: 100%;
+	}
+	100% {
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+@keyframes minimize2 {
+	50% {
+		top: 0;
+		height: 100%;
+	}
+	100% {
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	}
 }
